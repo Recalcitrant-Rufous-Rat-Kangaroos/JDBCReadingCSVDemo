@@ -75,25 +75,9 @@ public class DBController {
         }
 
         ResultSet resultSet = stmt.executeQuery(str);
-//        int nodeId = 0;
-//        int xcoord = 0;
-//        int ycoord = 0;
-//        int floor = 0;
-//        String building = "";
-//        String nodeType = "";
-//        String longName = "";
-//        String shortName = "";
-//        String teamAssigned = "";
+
         while (resultSet.next()){
-//            nodeId=resultSet.getInt("nodeId");
-//            xcoord=resultSet.getInt("xcoord");
-//            ycoord=resultSet.getInt("ycoord");
-//            floor=resultSet.getInt("floor");
-//            building=resultSet.getString("building");
-//            nodeType=resultSet.getString("nodeType");
-//            longName=resultSet.getString("longName");
-//            shortName=resultSet.getString("shortName");
-//            teamAssigned=resultSet.getString("teamAssigned");
+
             System.out.printf("%-20s",resultSet.getString("nodeId"));
             System.out.printf("%-10d",resultSet.getInt("xcoord"));
             System.out.printf("%-10d",resultSet.getInt("ycoord"));
@@ -103,21 +87,11 @@ public class DBController {
             System.out.printf("%-40s",resultSet.getString("longName"));
             System.out.printf("%-15s",resultSet.getString("shortName"));
             System.out.printf("%-10s",resultSet.getString("teamAssigned"));
-//            System.out.print(resultSet.getInt("nodeId"));
-//            System.out.print(resultSet.getInt("xcoord"));
-//            System.out.print(resultSet.getInt("ycoord"));
-//            System.out.print(resultSet.getInt("floor"));
-//            System.out.print(resultSet.getString("building"));
-//            System.out.print(resultSet.getString("nodeType"));
-//            System.out.print(resultSet.getString("longName"));
-//            System.out.print(resultSet.getString("shortName"));
-//            System.out.print(resultSet.getString("teamAssigned"));
+
             System.out.println();
         }
-//        System.out.println("nodeId: "+nodeId+" xcoord: "+xcoord+" ycoord: "+ycoord+" floor: "+floor+
-//                " building: "+building+" nodeType: "+nodeType+" longName: "+longName+" shortName: "+shortName+
-//                " teamAssigned: "+teamAssigned);
-    }
+
+}
 
     /**
      * Reads a CSV file
@@ -147,23 +121,7 @@ public class DBController {
      * @param als
      * @return an ArrayList that contains all the Nodes
      */
-    public ArrayList<Node> arrNode(ArrayList<String[]> als){
-        ArrayList<Node> aln = new ArrayList<Node>();
-        for (int i = 0; i < als.size(); i++){
-            Node nd = new Node();
-            nd.setNodeId(als.get(i)[0]);
-            nd.setXcoord(Integer.valueOf(als.get(i)[1]).intValue());
-            nd.setYcoord(Integer.valueOf(als.get(i)[2]).intValue());
-            nd.setFloor(Integer.valueOf(als.get(i)[3]).intValue());
-            nd.setBuilding(als.get(i)[4]);
-            nd.setNodeType(als.get(i)[5]);
-            nd.setLongName(als.get(i)[6]);
-            nd.setShortName(als.get(i)[7]);
-            nd.setTeamAssigned(als.get(i)[8]);
-            aln.add(nd);
-        }
-        return aln;
-    }
+
 
     /**
      * Creates a Node table
@@ -181,25 +139,7 @@ public class DBController {
      * @throws SQLException
      * @throws IllegalAccessException
      */
-    public void insertNode(String tableName, Node node) throws SQLException, IllegalAccessException {
-        String str = "";
-        Field[] fields = node.getClass().getDeclaredFields();
-        for (int i = 0; i < fields.length; i++){
-            if (fields[i].getGenericType().toString().equals("class java.lang.String")){
-                str+="'"+fields[i].get(node)+"'";
-                if (i!=fields.length-1){
-                    str+=",";
-                }
-            }
-            else if (fields[i].getGenericType().toString().equals("int")){
-                str+=fields[i].get(node);
-                if (i!=fields.length-1){
-                    str+=",";
-                }
-            }
-        }
-        insert(tableName, str);
-    }
+
 
     /**
      * Initializes the DataBase

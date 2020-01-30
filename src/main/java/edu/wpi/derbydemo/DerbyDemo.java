@@ -7,20 +7,29 @@ package edu.wpi.derbydemo;
 import java.sql.*;
 import java.util.ArrayList;
 import com.csvreader.CsvReader;
+import utils.JDBCutils;
+
 public class DerbyDemo {
     public static void main(String[] args) throws SQLException, IllegalAccessException {
-        System.out.println("John1");
-        DBController db = new DBController();
 
-        db.setup();
-        db.dropTable("Node");
-        db.createNodeTable();
+        JDBCutils db = new JDBCutils();
+
+
+
 
         ArrayList<String[]> al = db.readCsvFile("src/MapBnodes.csv");
-        ArrayList<Node> alnode = db.arrNode(al);
-        for (int i = 0; i < alnode.size(); i++){
-            db.insertNode("Node", alnode.get(i));
+        for (String[] array : al) {// This loop is used to iterate through the arraylist
+            for (String element : array) {//This loop is used to iterate through the array inside the arraylist
+                System.out.println(element);
+            }
         }
-        db.selectData("Node", "*");
-    }
+
+
 }
+
+
+
+
+
+    }
+
