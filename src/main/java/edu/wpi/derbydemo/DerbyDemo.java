@@ -1,10 +1,12 @@
 package edu.wpi.derbydemo;
 
 
-import java.sql.*;
+
+import edu.wpi.utils.JDBCutils;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
-import com.csvreader.CsvReader;
-import utils.JDBCutils;
+
 
 public class DerbyDemo {
     public static void main(String[] args) throws SQLException, IllegalAccessException {

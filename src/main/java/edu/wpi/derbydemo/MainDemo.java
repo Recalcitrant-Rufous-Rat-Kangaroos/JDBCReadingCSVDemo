@@ -1,6 +1,7 @@
 package edu.wpi.derbydemo;
 
-import utils.JDBCutils;
+import edu.wpi.utils.JDBCutils;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -31,9 +32,9 @@ public class MainDemo {
 
             String sql = "INSERT INTO Nodes  VALUES(?,?,?,?,?,?,?,?,?)";
 
-            for (String[] array : al) {// This loop is used to iterate through the arraylist
+            for (String[] array : al) {
                   pstmt = conn.prepareStatement(sql);
-                for (int i=0; i<array.length;i++) {//This loop is used to iterate through the array inside the arraylist
+                for (int i=0; i<array.length;i++) {
                     if(array[i].chars().allMatch(Character::isDigit)){
                         pstmt.setInt(i+1,Integer.parseInt(array[i]));
                     }else{

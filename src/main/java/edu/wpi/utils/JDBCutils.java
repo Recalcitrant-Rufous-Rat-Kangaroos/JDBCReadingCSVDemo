@@ -1,4 +1,4 @@
-package utils;
+package edu.wpi.utils;
 
 import com.csvreader.CsvReader;
 

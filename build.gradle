@@ -7,7 +7,7 @@ plugins {
 }
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
-mainClassName = 'edu.wpi.derbydemo.DerbyDemo'
+mainClassName = 'edu.wpi.derbydemo.John2'
 
 //TestFX doesn't play nice with macOS
 String osName = System.getProperty("os.name").toLowerCase();
