@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import com.csvreader.CsvReader;
 public class DerbyDemo {
     public static void main(String[] args) throws SQLException, IllegalAccessException {
+        System.out.println("John");
         DBController db = new DBController();
+
         db.setup();
         db.dropTable("Node");
         db.createNodeTable();
