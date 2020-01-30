@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Thu Jan 30 14:13:31 EST 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016f-f7df-69de-00000e9a2830 
-on database directory C:\Users\LJN\IdeaProjects\JDBCReadingCSVDemo\myDB with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
-Loaded from file:/C:/Users/LJN/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
+Thu Jan 30 17:33:27 EST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-016f-f896-72c1-000006e00518 
+on database directory C:\Users\rin\JDBCReadingCSVDemo\myDB with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/C:/Users/rin/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.14.2.0/7efad40ef52fbb1f08142f07a83b42d29e47d8ce/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_241-b07
-user.dir=C:\Users\LJN\IdeaProjects\JDBCReadingCSVDemo
+user.dir=C:\Users\rin\JDBCReadingCSVDemo
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

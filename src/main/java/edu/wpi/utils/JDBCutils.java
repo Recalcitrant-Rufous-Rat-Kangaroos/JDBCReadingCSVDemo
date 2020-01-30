@@ -2,6 +2,7 @@ package edu.wpi.utils;
 
 import com.csvreader.CsvReader;
 
+import javax.swing.plaf.nimbus.State;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -51,9 +52,37 @@ public class JDBCutils {
         return JDBCutils.getConnection().createStatement();
     }
 
+    public static void selectNode(Statement stmt, ResultSet rs) throws SQLException {
+
+        String sql2  = "SELECT * FROM Nodes";
+        rs = stmt.executeQuery(sql2);
+
+        while(rs.next()){
+            String nodeId = rs.getString("nodeId");
+            System.out.println(nodeId);
+        }
+    }
+
+    public static void insertNode(Connection conn, PreparedStatement pstmt) throws SQLException {
+        ArrayList<String[]> al = JDBCutils.readCsvFile(JDBCutils.getNodecsvPath());
 
 
-    public ArrayList<String[]> readCsvFile(String filePath) {
+        String sql = "INSERT INTO Nodes VALUES(?,?,?,?,?,?,?,?,?)";
+
+        for (String[] array : al) {
+            pstmt = conn.prepareStatement(sql);
+            for (int i=0; i<array.length;i++) {
+                if(array[i].chars().allMatch(Character::isDigit)){
+                    pstmt.setInt(i+1,Integer.parseInt(array[i]));
+                }else{
+                    pstmt.setString(i+1,array[i]);
+                }
+            }
+            pstmt.executeUpdate();
+        }
+    }
+
+    public static ArrayList<String[]> readCsvFile(String filePath) {
         ArrayList<String[]> csvList = new ArrayList<String[]>();
         try {
             CsvReader reader = new CsvReader(filePath, ',', Charset.forName("GBK"));

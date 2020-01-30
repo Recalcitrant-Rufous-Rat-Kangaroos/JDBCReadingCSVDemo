@@ -11,7 +11,7 @@ public class MainDemo {
     public static void main(String[] args){
 
 
-        JDBCutils db = new JDBCutils();
+      //  JDBCutils db = new JDBCutils();
 
 
         Connection conn = null;
@@ -28,30 +28,10 @@ public class MainDemo {
             JDBCutils.dropTable("Nodes", stmt);
             JDBCutils.createNodeTable(stmt);
 
-            ArrayList<String[]> al = db.readCsvFile(db.getNodecsvPath());
 
-            String sql = "INSERT INTO Nodes  VALUES(?,?,?,?,?,?,?,?,?)";
+            JDBCutils.insertNode(conn, pstmt);
 
-            for (String[] array : al) {
-                  pstmt = conn.prepareStatement(sql);
-                for (int i=0; i<array.length;i++) {
-                    if(array[i].chars().allMatch(Character::isDigit)){
-                        pstmt.setInt(i+1,Integer.parseInt(array[i]));
-                    }else{
-                        pstmt.setString(i+1,array[i]);
-                    }
-                }
-                pstmt.executeUpdate();
-            }
-
-            String sql2  = "SELECT * FROM Nodes";
-            rs = stmt.executeQuery(sql2);
-
-            while(rs.next()){
-                String nodeId = rs.getString("nodeId");
-                System.out.println(nodeId);
-            }
-
+            JDBCutils.selectNode(stmt, rs);
 
         } catch (SQLException e) {
             e.printStackTrace();
