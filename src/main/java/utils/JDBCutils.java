@@ -51,34 +51,6 @@ public class JDBCutils {
         return JDBCutils.getConnection().createStatement();
     }
 
-    public static void close(Connection conn, Statement stmt, ResultSet rs) {
-        close(conn, stmt);
-
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-    public static void close(Connection conn, Statement stmt) {
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (stmt != null) {
-            try {
-                stmt.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 
 
     public ArrayList<String[]> readCsvFile(String filePath) {
@@ -91,7 +63,6 @@ public class JDBCutils {
                 csvList.add(reader.getValues()); //Read in line by line and add to the arrayList
             }
             reader.close();
-            //System.out.println("Total lines£º" + csvList.size());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,6 +99,48 @@ public class JDBCutils {
     }
 
 
+
+    public static void close(Connection conn, Statement stmt) {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void close(Connection conn, Statement stmt, ResultSet rs) {
+        close(conn, stmt);
+
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void close(Connection conn, Statement stmt, ResultSet rs, PreparedStatement pstmt) {
+        close(conn,stmt,rs);
+
+        if(rs!=null) {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 
 
 }

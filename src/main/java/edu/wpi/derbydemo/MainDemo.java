@@ -2,10 +2,7 @@ package edu.wpi.derbydemo;
 
 import utils.JDBCutils;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class MainDemo {
@@ -18,12 +15,14 @@ public class MainDemo {
 
         Connection conn = null;
         Statement stmt = null;
+        ResultSet rs = null;
         PreparedStatement pstmt = null;
 
 
         try {
             conn = JDBCutils.getConnection();
             stmt = conn.createStatement();
+
 
             JDBCutils.dropTable("Nodes", stmt);
             JDBCutils.createNodeTable(stmt);
@@ -44,13 +43,23 @@ public class MainDemo {
                 pstmt.executeUpdate();
             }
 
+            String sql2  = "SELECT * FROM Nodes";
+            rs = stmt.executeQuery(sql2);
+
+            while(rs.next()){
+                String nodeId = rs.getString("nodeId");
+                System.out.println(nodeId);
+            }
+
 
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
-            JDBCutils.close(conn, stmt);
+            JDBCutils.close(conn,stmt,rs,pstmt);
         }
 
-    }
 
+
+
+    }
 }
