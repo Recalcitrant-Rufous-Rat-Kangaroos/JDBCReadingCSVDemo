@@ -1,9 +1,6 @@
 package edu.wpi.derbydemo;
 
-/**
- * Created by Xiaowei Chen
- * This is the version of Databse that inserts
- */
+
 import java.sql.*;
 import java.util.ArrayList;
 import com.csvreader.CsvReader;
