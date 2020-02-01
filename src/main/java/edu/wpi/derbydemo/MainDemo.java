@@ -10,10 +10,6 @@ public class MainDemo {
 
     public static void main(String[] args){
 
-
-      //  JDBCutils db = new JDBCutils();
-
-
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -32,6 +28,7 @@ public class MainDemo {
             JDBCutils.insertNode(conn, pstmt);
 
             JDBCutils.selectNode(stmt, rs);
+            JDBCutils.writeCsvFile();
 
         } catch (SQLException e) {
             e.printStackTrace();

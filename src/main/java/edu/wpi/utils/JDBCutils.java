@@ -1,8 +1,10 @@
 package edu.wpi.utils;
 
 import com.csvreader.CsvReader;
+import com.csvreader.CsvWriter;
 
 import javax.swing.plaf.nimbus.State;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +19,7 @@ public class JDBCutils {
     private static String url;
     private static String driver;
     private static String nodecsvPath;
+    private static String nodeOutputcsvPath;
 
 
 
@@ -30,6 +33,7 @@ public class JDBCutils {
             url = pro.getProperty("url");
             driver = pro.getProperty("driver");
             nodecsvPath = pro.getProperty("nodecsvPath");
+            nodeOutputcsvPath = pro.getProperty("nodeOutputcsvPath");
             Class.forName(driver);
 
         } catch (IOException e) {
@@ -82,6 +86,42 @@ public class JDBCutils {
         }
     }
 
+    public static void CheckandCreateFile(){
+        File file = new File(nodeOutputcsvPath);
+        try{
+            if (!file.exists()){
+                file.createNewFile();
+                System.out.println("Node output file created successfully");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Export the data to a csv file
+     */
+    public static void writeCsvFile(){
+        CheckandCreateFile();
+        try {
+            CsvWriter cvw = new CsvWriter(nodeOutputcsvPath, ',', Charset.forName("GBK"));
+            ArrayList<String[]> al = JDBCutils.readCsvFile(JDBCutils.getNodecsvPath());
+            for (int i = 0; i < al.size(); i++) {
+                cvw.writeRecord(al.get(i));
+            }
+            cvw.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Reads the CSV file and writes to database
+     * @param filePath
+     * @return
+     */
     public static ArrayList<String[]> readCsvFile(String filePath) {
         ArrayList<String[]> csvList = new ArrayList<String[]>();
         try {
